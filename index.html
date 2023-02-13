@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Placar online</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="header">
+        <form>
+            <input type="text" name="" id="nome-jogador" placeholder="Adicionar jogador">
+            <button
+            id="btn-add-jogador">Adicionar</button>
+            <button 
+            id="btn-edita-jogadores">Editar jogadores</button>
+            <button
+            id="btn-conclui-edicao">Concluir edição</button>
+        </form>
+    </header>
+
+    <main>    
+        <section class="section-editar-jogadores">
+        </section>
+
+        <section class="mostrar-jogadores">
+            <table class="table-mostrar-jogadores">
+                <thead>
+                    <tr>
+                        <td>Nome</td>
+                        <td>Pontuação</td>
+                    </tr>
+                </thead>
+    
+                <tbody class="tbody-mostrar-jogadores"></tbody>
+            </table>
+        </section>
+    </main>
+</body>
+<script src="./script.js"></script>
+</html>
