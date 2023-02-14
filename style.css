@@ -38,12 +38,15 @@ header input{
     margin-inline: 2px;
 }
 
+#btn-add-jogador, #btn-edita-jogadores, #btn-conclui-edicao{
+    border: solid 1px black;
+}
 button{
     cursor: pointer;
 }
 .article-jogador{
-    width: 200px;
-    height: 200px;
+    width: 180px;
+    height: 180px;
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -51,10 +54,12 @@ button{
     background-color: olivedrab;
     border-radius: 5px;
     margin: 5px;
+    box-shadow: green 5px 5px;
+    margin-block: 10px;
 }
 
 .article-jogador header{
-    border: dashed 2px whitesmoke;
+    border: solid 2px whitesmoke;
     color: whitesmoke;
     background-color: darkcyan;
     padding: 5px;
@@ -85,9 +90,9 @@ button{
 
 .section-editar-jogadores{
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap:wrap;
     overflow: auto;
-    background-color: lightsalmon;
+    background-color: rgb(164, 218, 58);
 }
 
 .table-mostrar-jogadores{
@@ -113,7 +118,8 @@ button{
 }
 
 .tbody-mostrar-jogadores tr td{
-    padding: 5px;    
+    padding: 5px;
+    font-weight: bold;
 }
 
 #pontuacao-jogador{

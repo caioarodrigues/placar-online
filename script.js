@@ -2,6 +2,7 @@ const jogadores = [];
 const pontuacaoInicial = 0;
 const sectionEditarJogadoresStyle = document.querySelector('.section-editar-jogadores').style;
 const btnConcluiEdicaoStyle = document.querySelector('#btn-conclui-edicao').style;
+const btnEditaJogadoresStyle = document.querySelector('#btn-edita-jogadores').style;
 const inputNome = document.querySelector('#nome-jogador');
 const tableMostrarJogadores = document.querySelector('.table-mostrar-jogadores');
 const tbodyMostrarJogadores = document.querySelector('.tbody-mostrar-jogadores')
@@ -185,6 +186,7 @@ document.querySelector('#btn-edita-jogadores').onclick = e => {
     sectionEditarJogadoresStyle.display = 'flex';
     btnConcluiEdicaoStyle.display = 'inline';
     tableMostrarJogadores.style.display = 'none';
+    btnEditaJogadoresStyle.display = 'none';
     inputNome.disabled = true;
 
     jogadores.forEach(jogador => {
@@ -199,6 +201,7 @@ document.querySelector('#btn-conclui-edicao').onclick = e => {
     sectionEditarJogadoresStyle.display = 'none';
     btnConcluiEdicaoStyle.display = 'none';
     tableMostrarJogadores.style.display = 'block';
+    btnEditaJogadoresStyle.display = 'inline';
     inputNome.disabled = false;
 
     document.querySelectorAll('.article-jogador').forEach(article => {
