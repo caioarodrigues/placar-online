@@ -8,6 +8,28 @@ const tableMostrarJogadores = document.querySelector('.table-mostrar-jogadores')
 const tbodyMostrarJogadores = document.querySelector('.tbody-mostrar-jogadores')
 const getNome = () => inputNome.value;
 const limpaInputNome = () => inputNome.value = '';
+const localStorageKey = 'jogadores'; 
+
+function salvaCacheNavegador(){
+    let jogadoresString = JSON.stringify(jogadores);
+    
+    if(!localStorage.getItem(localStorageKey)){
+        localStorage.setItem(localStorageKey, jogadoresString);
+
+        return;
+    }
+    
+    jogadoresString = JSON.stringify(jogadores);
+    localStorage.removeItem(localStorageKey);
+    localStorage.setItem(localStorageKey, jogadoresString);
+}
+
+function carregaCacheNavegador(){
+    const jogadoresArr = JSON.parse(localStorage.getItem(localStorageKey));
+
+    jogadores.push( ...jogadoresArr );
+    addTodosJogadoresNaTable();
+}
 
 function limpaTableJogadores(){
     document.querySelectorAll('.tbody-mostrar-jogadores tr')
@@ -101,6 +123,8 @@ function criaMain(jogador){
             if(jogador.nome === nome){
                 jogador.pontuacao++;
                 pontuacao.innerHTML = jogador.pontuacao;
+
+                salvaCacheNavegador();
             }
         });
     }
@@ -113,18 +137,26 @@ function criaMain(jogador){
             if(jogador.nome === nome && jogador.pontuacao > 0){
                 jogador.pontuacao--;
                 pontuacao.innerHTML = jogador.pontuacao;
+
+                salvaCacheNavegador();
             }
         });
     }
 
     btnDel.onclick = e => {
-        const nome = getNomeJogador(e);
-        const pontuacao = getPontuacaoJogador(e);
-        const jogador = { nome, pontuacao };
-        const index = jogadores.indexOf(jogador) - 1;
+        const nomeJogador = getNomeJogador(e);
 
-        jogadores.splice(index, 1);
-        removeArticle(e);
+        for(let i in jogadores){
+            const { nome, pontuacao } = jogadores[i];
+
+            if(nome === nomeJogador){
+                jogadores.splice(i, 1);
+                removeArticle(e);
+                salvaCacheNavegador();
+            
+                return;
+            }
+        }
     }
 
     span.innerText = pontuacao;
@@ -177,6 +209,7 @@ document.querySelector('#btn-add-jogador').onclick = e => {
         
         jogadores.push(thisJogador);
         atualizaTabelaJogadores();
+        salvaCacheNavegador();
     }
 
     limpaInputNome();
@@ -188,11 +221,12 @@ document.querySelector('#btn-edita-jogadores').onclick = e => {
     tableMostrarJogadores.style.display = 'none';
     btnEditaJogadoresStyle.display = 'none';
     inputNome.disabled = true;
-
+    
     jogadores.forEach(jogador => {
         criaArticleJogador(jogador, 'article-jogador');
     });
-
+    
+    limpaInputNome();
     limpaTableJogadores();
     e.preventDefault();
 }
@@ -210,5 +244,8 @@ document.querySelector('#btn-conclui-edicao').onclick = e => {
     
     limpaTableJogadores();
     addTodosJogadoresNaTable();
+    salvaCacheNavegador();
     e.preventDefault();
 }
+
+carregaCacheNavegador();
