@@ -30,6 +30,14 @@ header input{
     width: 40%;
 }
 
+#input-nome-jogador{
+    width: 100%;
+    border-color: transparent;
+    outline: none;
+    text-align: center;
+    background-color: transparent;
+}
+
 #nome-jogador, #btn-add-jogador, #btn-edita-jogadores, #btn-conclui-edicao{
     padding: 5px;
     border-radius: 5px;
@@ -59,7 +67,7 @@ button{
 }
 
 .article-jogador header{
-    border: solid 2px whitesmoke;
+    border: dashed 2px whitesmoke;
     color: whitesmoke;
     background-color: darkcyan;
     padding: 5px;
@@ -73,11 +81,15 @@ button{
 }
 
 .article-jogador main button{
-    margin-top: 5px;
+    margin-top: 3px;
     padding: 3px;
     border-radius: 5px;
     border-color: transparent;
     font-weight: bold;
+}
+
+.article-jogador main button:hover{
+    background-color: rgb(209, 221, 233);
 }
 
 .mostrar-jogadores{

@@ -85,16 +85,28 @@ function criaHeader(jogador){
     const { nome } = jogador;
     const header = document.createElement('header');
     const span = document.createElement('span');
+    const input = document.createElement('input');
+    input.setAttribute('id', 'input-nome-jogador');
 
+    input.value = nome;
     span.innerText = nome;
-    header.appendChild(span);
+    header.appendChild(input);
 
     return header;
 }
 
 function criaMain(jogador){
     function getNomeJogador(e){
-        return e.target.parentElement.className;
+        const nome = e.target.parentElement.parentNode
+            .querySelector('#input-nome-jogador').value; 
+        
+        return nome; 
+    }
+
+    function getNomeAntigo(e){
+        const nome = e.target.parentElement.className;
+
+        return nome;
     }
 
     function getPontuacaoJogador(e){
@@ -109,12 +121,32 @@ function criaMain(jogador){
     const main = document.createElement('main');
     const span = document.createElement('span');
     const div = document.createElement('div');
+    const btnSalvar = criaBotao('salvar');
     const btnAdd = criaBotao('+');
     const btnSub = criaBotao('-');
     const btnDel = criaBotao('remover');
 
     main.setAttribute('class', nome);
     span.setAttribute('id', 'pontuacao-jogador');
+
+    btnSalvar.onclick = e => {
+        const nomeAntigoJogador = getNomeAntigo(e);
+
+        for(let i in jogadores){
+            const { nome } = jogadores[i];
+
+            if(nome === nomeAntigoJogador){
+                const nomeAtual = getNomeJogador(e);
+
+                console.log("nome atual: " + nomeAtual)
+                jogadores[i].nome = nomeAtual;
+                salvaCacheNavegador();
+
+                return;
+            }
+        }
+    }
+
     btnAdd.onclick = e => {
         const nome = getNomeJogador(e);
         const pontuacao = getPontuacaoJogador(e);
@@ -163,6 +195,7 @@ function criaMain(jogador){
 
     div.appendChild(span);
     main.appendChild(div);
+    main.appendChild(btnSalvar);
     main.appendChild(btnAdd);
     main.appendChild(btnSub);
     main.appendChild(btnDel);
